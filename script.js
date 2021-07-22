@@ -1,3 +1,4 @@
+//=MAGIC CARD OBJECTS.
 var magicCard = {
     id: 1,
     name: 'Bloodfire Colossus',
@@ -34,3 +35,64 @@ var magicCard = {
     },
 };
 
+//=PRINT OBJECTS IN PAGE.
+var printCard = document.getElementById('magic-card');
+//?IN CASE THERE'S NO 'SUBTYPE'. 
+var verifiedCardType = '';
+
+if (magicCard.subType) {
+    if (magicCard.subType.trim() !== '') {//^NON POSSO METTERLO ALLO STESSO LIVELLO DELL'ALTRO IF, PERCHE ALTRIMENTI MI DAREBBE ERRORE NEL CASO IN CUI NON CI FOSSE DATO CHE NON LO TROVA.
+        verifiedCardType = `- ${magicCard.subType}</li>`;
+    };
+};
+
+
+//?FOR-CYCLE IN CASE THERE'S LESS THAN ONE OBJECT IN 'ABILITIES'. 
+let abilitiesDetails = '';
+
+for (let i = 0; i < magicCard.abilities.length; i++) {
+    if (magicCard.abilities.length > 0) {
+        abilitiesDetails += `<li>Launch cost: ${magicCard.abilities[i].launchCost}`;
+        abilitiesDetails += `<li>Description: ${magicCard.abilities[i].description}`;
+    }
+};
+
+
+
+let cardTemplate = `
+<ul class="card">
+<li>Id card: ${magicCard.id}</li>
+<li>Name: ${magicCard.name}</li>
+<li>Launch cost: ${magicCard.launchCost.join(', ')}</li>
+<li>Combined launch cost: ${magicCard.combninedLaunchCost}</li>
+<li>Card type: ${magicCard.cardType} ${verifiedCardType}</li>
+<li class="red-dot">Expansion:
+    <ul>
+        <li>Expansion number: ${magicCard.expansion.reprintId}</li>
+        <li>Expansion name: ${magicCard.expansion.expansionName}</li>
+        <li>Card rarity: ${magicCard.expansion.rarityColor}</li>
+    </ul>
+</li>
+<li class="red-dot">Flavor:
+    <ul>
+        <li>Flavor text quote: ${magicCard.flavorText.quote}</li>
+        <li>Flavor text author: ${magicCard.flavorText.author}</li>
+    </ul>
+</li>
+<li class="red-dot">Abilities:
+    <ul>
+        ${abilitiesDetails}
+    </ul>
+</li>
+<li>Id card: ${magicCard.collectionNumber}</li>
+<li>Constitution: ${magicCard.constitution}</li>
+<li>Strength: ${magicCard.strength}</li>
+<li class="red-dot">Illustration:
+    <ul>
+        <li>Illustration id: ${magicCard.illustration.id}</li>
+        <li>Illustrator Name: ${magicCard.illustration.name}</li>
+    </ul>
+</li>
+`
+
+printCard.innerHTML = cardTemplate;
