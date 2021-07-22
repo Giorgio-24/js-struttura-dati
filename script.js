@@ -1,3 +1,11 @@
+//=VAR AND FUNCTIONS.
+const printCard = document.getElementById('magic-card');
+
+
+
+
+
+
 //=MAGIC CARD OBJECTS.
 var magicCard = {
     id: 1,
@@ -34,17 +42,21 @@ var magicCard = {
         name: 'Greg Staples',
     },
 };
-
 //=PRINT OBJECTS IN PAGE.
-var printCard = document.getElementById('magic-card');
 //?IN CASE THERE'S NO 'SUBTYPE'. 
-var verifiedCardType = '';
 
-if (magicCard.subType) {
-    if (magicCard.subType.trim() !== '') {//^NON POSSO METTERLO ALLO STESSO LIVELLO DELL'ALTRO IF, PERCHE ALTRIMENTI MI DAREBBE ERRORE NEL CASO IN CUI NON CI FOSSE DATO CHE NON LO TROVA.
-        verifiedCardType = `- ${magicCard.subType}</li>`;
+function isSubTypeMissing(elemento) {
+    var result = '';
+    if (elemento) {
+        if (elemento.trim() !== '') {//^NON POSSO METTERLO ALLO STESSO LIVELLO DELL'ALTRO IF, PERCHE ALTRIMENTI MI DAREBBE ERRORE NEL CASO IN CUI NON CI FOSSE DATO CHE NON LO TROVA.
+            result = `- ${elemento}`;
+        };
     };
+    return result;
 };
+
+
+verifiedCardType = isSubTypeMissing(magicCard.subType);
 
 
 //?FOR-CYCLE IN CASE THERE'S LESS THAN ONE OBJECT IN 'ABILITIES'. 
