@@ -1,3 +1,19 @@
+.hidden{
+  display: none;
+}
+
+section>ul.card{
+  border: 1px solid #000;
+  width: 345px;
+  border-radius: 20px;
+  display: inline-block;
+  margin-right: 20px;
+}
+
+section.card-section li{
+margin: 3px 0;
+}
+
 .red-dot {
     list-style: none; /* Remove default bullets */
   }
