@@ -186,9 +186,9 @@ const renderDeck = (myDeck, targetElement) => {
 
     let deckTemplate = '';
 
-    for (let i = 0; i < deck.length; i++) {
+    for (let i = 0; i < myDeck.length; i++) {
 
-        const currentCard = deck[i];
+        const currentCard = myDeck[i];
         deckTemplate += createCardTemplate(currentCard);
     };
 
@@ -206,7 +206,7 @@ const inputField = document.getElementById('search');
 const selectField = document.getElementById('filter');
 const button = document.getElementById('button');
 
-selectField.addEventListener('change', () => {
+selectField.addEventListener('change', () => {//^CAMBIA QUALCOSA DI PREDEFINITO
     const currentValue = selectField.value;
 
     if (currentValue !== 'all') {
@@ -214,4 +214,43 @@ selectField.addEventListener('change', () => {
     } else {
         inputField.classList.add('hidden');
     }
+});
+
+//?RACCOGLIERE IL VALUE DELL' OPZIONE E ANCHE QUELLO DEL SEARCH.
+button.addEventListener('click', () => {
+    var selectedOption = selectField.value;
+    var userTypedValue = inputField.value;
+
+    if (selectedOption === 'all') {
+        renderDeck(deck, printCard);
+        return;
+    }
+
+    const filteredDeck = [];
+    for (let i = 0; i < deck.length; i++) {
+        const currentCard = deck[i];
+
+        switch (selectedOption) {
+            case 'id':
+            case 'comninedLaunchCost':
+            case 'reprintId':
+            case 'constitution':
+            case 'strength':
+                /* case 'id': */
+                if (currentCard[selectedOption] == userTypedValue) {
+                    filteredDeck.push(currentCard);
+                };
+                break;
+            default:
+                if (currentCard[selectedOption].includes(userTypedValue)) {
+                    filteredDeck.push(currentCard);
+                }
+        };
+    };
+
+
+
+
+
+    renderDeck(filteredDeck, printCard);
 });
